@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>התחברות</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <h2>התחברות</h2>
+    <form method="POST" action="/login">
+        <label for="email">אימייל:</label>
+        <input type="email" name="email" id="email" required value="{{ email or '' }}"><br><br>
+
+        <label for="password">סיסמה:</label>
+        <input type="password" name="password" id="password" required><br><br>
+
+        <button type="submit">התחבר</button>
+    </form>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <p>לא מחוברים? <a href="{{ url_for('register') }}?email={{ email }}">הירשמו עכשיו!</a></p>
+    <a href="{{ url_for('home') }}"><button>חזרה לדף הבית</button></a>
+
+</body>
+</html>

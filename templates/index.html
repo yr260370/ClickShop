@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ClickShopShop - דף כניסה</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ClickShop Logo">
+        <h1>!ברוכים הבאים לאפליקציית ניהול קניות</h1>
+        <div class="buttons">
+            <a href="{{ url_for('login') }}">
+                <button class="btn">התחבר</button>
+            </a>
+            <a href="{{ url_for('register') }}">
+                <button class="btn">הירשם עכשיו</button>
+            </a>
+        </div>
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('demo_profile') }}" style="padding: 10px 20px; background-color: #41F2C0; color: white; text-decoration: none; border-radius: 5px;">
+                הדגם לי את האפליקציה
+            </a>
+        </div>        
+    </div>
+</body>
+</html>

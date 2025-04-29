@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>השוואת מחירים</title>
+</head>
+<body>
+    <h1>🛒 השוואת מחירים מול החנות</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>שם מוצר</th>
+                <th>מחיר בחנות</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in store_products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }} ₪</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('profile') }}">🔙 חזרה לפרופיל</a>
+</body>
+</html>

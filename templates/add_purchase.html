@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>הוספת רכישה</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>הוספת רכישה חדשה עבור {{ user.username }}</h2>
+
+        <form method="POST" action="{{ url_for('add_purchase') }}">
+            <label>שם מוצר:</label>
+            <input type="text" name="name" required><br><br>
+
+            <label>כמות:</label>
+            <input type="number" name="quantity" required><br><br>
+
+            <label>מחיר:</label>
+            <input type="number" name="price" step="0.01" required><br><br>
+
+            <label>קטגוריה:</label>
+            <input type="text" name="category"><br><br>
+
+            <label>תאריך:</label>
+            <input type="date" name="date" value="{{ current_date }}"><br><br>
+
+            <button type="submit">הוסף רכישה</button>
+        </form>
+        <br><br>
+        <div class="btns">
+            <a href="{{ url_for('profile') }}">
+                <button>חזרה לאזור אישי</button>
+            </a>        
+            <a href="{{ url_for('home') }}"><button>חזרה לדף הבית</button></a>
+        </div>   
+    </div>
+</body>
+</html>

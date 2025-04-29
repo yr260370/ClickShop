@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ייעול קניות</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/check_price.css') }}">
+</head>
+<body>
+    <h1>ברוך הבא לדף ייעול הקניות!</h1>
+    <p>הקלד את המוצרים שרכשת כדי לבדוק אם הם זולים יותר בחנויות
+    <form action="{{ url_for('check_prices') }}" method="POST">
+        <label for="product_name">שם המוצר:</label>
+        <input type="text" id="product_name" name="product_name" required>
+
+        <label for="purchase_price">מחיר רכישה:</label>
+        <input type="number" id="purchase_price" name="purchase_price" required>
+
+        <label for="product_url">קישור לחנות בה קנית:</label>
+        <input type="url" id="product_url" name="product_url" required>
+
+        <button type="submit">בדוק מחירים</button>
+    </form>
+    <a href="{{ url_for('home') }}"><button>חזרה לדף הבית</button></a>
+    <p>לאחר שתלחץ על "בדוק מחירים", נבצע את החיפוש ונחזור אליך עם תוצאות.</p>
+</body>
+</html>

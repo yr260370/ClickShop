@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרשמה</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body>
+    <h2>הרשמה</h2>
+    <form method="POST" action="/register">
+        <label for="username">שם משתמש:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="email">אימייל:</label>
+        <input type="email" id="email" name="email" required value="{{ email or '' }}">
+
+        <label for="password">סיסמא:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="confirm_password">אימות סיסמא:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <button type="submit">הרשמה</button>
+    </form>
+
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+    <p><a href="{{ url_for('login') }}?email={{ email }}">למעבר להתחברות</a></p>
+    <a href="{{ url_for('home') }}"><button>חזרה לדף הבית</button></a>
+
+
+</body>
+</html>

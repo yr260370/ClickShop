@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>האזור האישי</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+        <nav>              
+            <a href="{{ url_for('save_data') }}">גיבוי נתונים</a>           
+            <a href="{{ url_for('graph1') }}">גרף רכישות לפי קטגוריה</a>
+            <a href="{{ url_for('graph2') }}">גרף רכישות לפי חודשים</a>
+            <a href="{{ url_for('optimize_shopping') }}" class="btn">ייעול קניות</a>
+            <a href="{{ url_for('home') }}">חזרה לדף הבית</a>
+            <a href="{{ url_for('logout') }}">התנתק</a>
+        </nav>
+        <h2>שלום {{ user.username }}!</h2>
+    <div class="profile-container">         
+        <h3>הרכישות שלך:</h3>
+        <form method="GET" onsubmit="searchByDates(event)" class="date-search-form">
+                <label>מתאריך:</label>
+                <input type="date" id="start_date" required>
+                <label>עד תאריך:</label>
+                <input type="date" id="end_date" required>
+                <button type="submit">הצג רכישות בטווח</button>
+                <a href="{{ url_for('download_data') }}">
+                    <img src="{{ url_for('static', filename='images/download.png') }}" alt="הורד קובץ" style="width:30px; height:30px; cursor:pointer;">
+                </a>
+        </form>
+       
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% else %}
+            
+        {% if purchases %}
+            <div class="purchases-grid">
+                {% for p in purchases %}
+                    <div class="purchase-card">
+                        <h4>שם מוצר:  {{ p.name }}</h4>
+                        <p><strong>כמות:</strong> {{ p.quantity }} יחידות</p>
+                        <p><strong>מחיר:</strong> {{ p.price }} ₪</p>
+                        <p><strong>תאריך:</strong> {{ p.date.strftime('%d/%m/%Y') }}</p>
+                        <form method="POST" action="{{ url_for('delete_purchase', purchase_id=p.id) }}" onsubmit="return confirm('אתה בטוח שברצונך למחוק?');">
+                            <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
+                        </form>                        
+                    </div>
+        {% endfor %}
+            </div>                
+            {% else %}
+                <p>אין לך עדיין רכישות.</p>
+            {% endif %}
+        {% endif %}           
+        <!-- לינק לדף הוספת רכישה -->
+        <a href="{{ url_for('add_purchase') }}">
+            <button>הוסף רכישה</button>
+        </a>        
+    </div>
+     <!--פונקצית חיפוש לפי תאריך-->      
+     <script>
+        function searchByDates(event) {
+            event.preventDefault();
+            const start = document.getElementById('start_date').value;
+            const end = document.getElementById('end_date').value;
+            const formatDate = (str) => {
+            const parts = str.split("-");
+                return `${parts[2]}-${parts[1]}-${parts[0]}`;
+            };            
+            const formattedStart = formatDate(start);
+            const formattedEnd = formatDate(end);
+            window.location.href = `/profile/${formattedStart}/${formattedEnd}`;
+        }
+    </script>            
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="flash-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %} 
+
+    
+    
+</body>
+</html>

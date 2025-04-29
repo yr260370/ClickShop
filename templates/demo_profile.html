@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דף דמו - רכישות</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">
+</head>
+<body>
+    <h1>ברוך הבא לדף דמו</h1>
+
+    <h2>רכישות לשבוע האחרון</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>שם מוצר</th>
+                <th>כמות</th>
+                <th>מחיר</th>
+                <th>קטגוריה</th>
+                <th>תאריך</th>
+                <th>סך הוצאה</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in purchases %}
+                <tr>
+                    <td>{{ row['שם מוצר'] }}</td>
+                    <td>{{ row['כמות'] }}</td>
+                    <td>{{ row['מחיר'] }}</td>
+                    <td>{{ row['קטגוריה'] }}</td>
+                    <td>{{ row['תאריך'] }}</td>
+                    <td>{{ row['סך הוצאה'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>הערה: אין אפשרות להוסיף רכישות או להוריד נתונים בדף דמו.</h3>
+
+    <div class="links">
+        <a href="{{ url_for('register') }}"><button>הרשמה</button></a> 
+        <a href="{{ url_for('login') }}"><button>התחברות</button></a> 
+        <a href="{{ url_for('profile') }}"><button>אזור אישי</button></a>
+    </div>
+</body>
+</html>

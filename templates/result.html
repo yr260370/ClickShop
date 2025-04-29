@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תוצאת השוואת מחירים</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 תוצאת בדיקת מחירים</h1>
+
+        <div class="result">
+            <p><strong>שם המוצר:</strong> {{ product_name }}</p>
+            <p><strong>מחיר שרכשת:</strong> {{ purchase_price }} ₪</p>
+
+            {% if previous_price %}
+            <p><strong>מחיר ששילמת בעבר:</strong> {{ previous_price }} ₪</p>
+            {% endif %}
+
+            {% if store_price %}
+                <p><strong>מחיר בחנות:</strong> {{ store_price }} ₪</p>
+
+                {% if store_price < purchase_price %}
+                    <p class="success">💰 מצאנו מחיר זול יותר!</p>
+                {% elif store_price > purchase_price %}
+                    <p class="warning">🔼 שילמת פחות ממה שיש עכשיו בחנות.</p>
+                {% else %}
+                    <p class="neutral">🟰 המחיר זהה.</p>
+                {% endif %}
+            {% else %}
+                <p class="error">❌ לא הצלחנו למצוא את המחיר בדף החנות.</p>
+            {% endif %}
+        </div>
+        <a href="{{ url_for('check_prices') }}"><button> חזרה לבדיקה נוספת</button></a>
+    </div>
+</body>
+</html>

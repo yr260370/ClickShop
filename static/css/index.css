@@ -1,0 +1,74 @@
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f4f9; /* רקע בהיר */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;           
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* גובה הדף 100% */
+    text-align: center;
+    padding: 20px;
+}
+
+img.logo {
+    max-width: 350px; 
+    /* width: 100%; */
+    height: 150px;
+    /* height: auto;  */
+    margin-bottom: 20px; 
+}
+
+h1 {
+    margin-top: 15vh;
+    color: #5FC6E3; 
+    margin-bottom: 10px;
+}
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #41F2F0;
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    width: 250px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #5FC6E3; 
+}
+
+a {
+    text-decoration: none;
+}
+
+a:focus, a:hover {
+    outline: none;
+}
