@@ -25,6 +25,7 @@ app.secret_key = 'your_secret_key' #אבטחת נתונים
 # הגדרת מסד נתונים SQLite (קובץ בשם purchases.db בתיקיה הראשית)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///purchases.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy()      
 db.init_app(app)  # הרשמת האפליקציה עם ה-SQLAlchemy
 
 # db = SQLAlchemy(app)
