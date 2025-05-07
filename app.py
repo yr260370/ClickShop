@@ -151,7 +151,6 @@ def profile_by_date(start_date, end_date):
     email = session.get('user_email')
     if not email:
         return redirect(url_for('login'))
-
     user = User.query.filter_by(email=email).first()
     if not user:
         return redirect(url_for('login'))
