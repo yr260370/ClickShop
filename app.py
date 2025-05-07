@@ -6,7 +6,6 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import io
-from faker import Faker
 import numpy as np
 import requests
 from bs4 import BeautifulSoup
@@ -39,18 +38,14 @@ def home():
 
 
 
-# יצירת נתונים מזויפים עבור רכישות
-fake = Faker('he_IL')  # עברית
-Faker.seed(0)
-
 # יצירת נתונים דמוי רכישות עם numpy
 def generate_fake_data(num_entries=10):
     np.random.seed(0)
      # נתונים אקראיים
-    products = np.random.choice(['מוצר A', 'מוצר B', 'מוצר C', 'מוצר D', 'מוצר E'], size=num_entries)
+    products = np.random.choice(['שוקולד', 'אגוזים', 'חצאית', 'שמלה', 'מסקרה', 'שפתון עמיד', 'נגן', 'מחשב', 'טבעת','שעון',''], size=num_entries)
     quantities = np.random.randint(1, 6, size=num_entries)
     prices = np.random.randint(10, 101, size=num_entries)
-    categories = np.random.choice(['קטגוריה 1', 'קטגוריה 2', 'קטגוריה 3'], size=num_entries)
+    categories = np.random.choice(['ממתקים', 'מזון', 'תכשיטים', 'איפור', 'אלקטרוניקה', 'ביגוד'], size=num_entries)
     # יצירת תאריכים אקראיים
     start_date = datetime.now() - timedelta(days=365)
     dates = [start_date + timedelta(days=np.random.randint(0, 365)) for _ in range(num_entries)]
