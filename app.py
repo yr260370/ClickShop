@@ -45,7 +45,7 @@ def generate_fake_data(num_entries=10):
     products = np.random.choice(['שוקולד', 'אגוזים', 'חצאית', 'שמלה', 'מסקרה', 'שפתון עמיד', 'נגן', 'מחשב', 'טבעת','שעון',''], size=num_entries)
     quantities = np.random.randint(1, 6, size=num_entries)
     prices = np.random.randint(10, 101, size=num_entries)
-    categories = np.random.choice(['ממתקים', 'מזון', 'תכשיטים', 'איפור', 'אלקטרוניקה', 'ביגוד'], size=num_entries)
+    categories = np.random.choice(['ממתקים', 'מזון', 'תכשיטים', 'ביגוד', 'איפור', 'אלקטרוניקה'], size=num_entries)
     # יצירת תאריכים אקראיים
     start_date = datetime.now() - timedelta(days=365)
     dates = [start_date + timedelta(days=np.random.randint(0, 365)) for _ in range(num_entries)]
