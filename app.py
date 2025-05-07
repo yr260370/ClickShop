@@ -16,20 +16,27 @@ import arabic_reshaper
 plt.rcParams['font.family'] = 'Calibri'
 plt.rcParams['font.sans-serif'] = ['Arial', 'Assistant', 'Tahoma']
 plt.rcParams['axes.unicode_minus'] = False
-
+from models import User, Purchase
 
 
 app = Flask(__name__)
 
 app.secret_key = 'your_secret_key' #אבטחת נתונים
-# הגדרת מסד נתונים SQLite (קובץ בשם purchases.db בתיקיה הראשית)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///purchases.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy()      
 db.init_app(app)  # הרשמת האפליקציה עם ה-SQLAlchemy
 
-# db = SQLAlchemy(app)
-from models import User, Purchase
+
+
+
+@app.route('/index')
+def index():
+    return render_template("index.html")
+
+@app.route('/', methods=['GET'])
+def home():
+    return index()  #render_template('index.html')
+
 
 
 # יצירת נתונים מזויפים עבור רכישות
@@ -65,15 +72,10 @@ demo_df['תאריך'] = pd.to_datetime(demo_df['תאריך'])
 demo_df['סך הוצאה'] = demo_df['כמות'] * demo_df['מחיר']  # חישוב מחדש של סך ההוצאה
 
 
+@app.route('/demoProfile')
+def demo_profile():
+    return render_template('demo_profile.html', purchases=demo_df.to_dict(orient='records'))
 
-
-@app.route('/index')
-def index():
-    return render_template("index.html")
-
-@app.route('/', methods=['GET'])
-def home():
-    return index()  #render_template('index.html')
 
 
 # הרשמה
@@ -335,11 +337,6 @@ def graph2_image():
 
  
  
- 
-@app.route('/demoProfile')
-def demo_profile():
-    return render_template('demo_profile.html', purchases=demo_df.to_dict(orient='records'))
-
 
 @app.route('/comparePrices')
 def compare_prices():
@@ -385,7 +382,7 @@ def optimize_shopping():
 def shopping_optimization():
     # כאן תוכל להוסיף את הקוד שלך לקרוא את המוצרים ולחפש את המחירים
     # דוגמה לאתר חנות אינטרנטית
-    url = 'https://www.example.com/products'
+    url = 'https://ksp.co.il/web/'
     response = requests.get(url)
     # אם הבקשה עברה בהצלחה
     if response.status_code == 200:
@@ -436,8 +433,6 @@ def check_prices():
                                store_price=store_price,
                                previous_price=previous_price)
     return render_template("check_prices.html")
-
-
 
 
 
